@@ -1,42 +1,35 @@
 'use client';
 
-import { useState, useEffect, use } from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { notFound } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Download, File, Clock, User, Shield, CloudDownload } from 'lucide-react';
-import { Header } from '@/components/Header';
-
-interface DownloadPageProps {
-  params: {
-    id: string;
-  };
-}
 
 // Mock data for demonstration
 const mockTransfers = [
- {
+  {
     id: 'abc123def456',
- files: [
+    files: [
       { name: 'presentation.pdf', size: 2.3 * 1024 * 1024, type: 'application/pdf' },
       { name: 'images.zip', size: 15.7 * 1024 * 1024, type: 'application/zip' },
       { name: 'document.docx', size: 1.2 * 1024 * 1024, type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' },
- ],
- senderEmail: 'john@example.com',
- message: 'Here are the files you requested for the project. Let me know if you need anything else!',
- expiresAt: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000), // 6 days from now
+    ],
+    senderEmail: 'john@example.com',
+    message: 'Here are the files you requested for the project. Let me know if you need anything else!',
+    expiresAt: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000), // 6 days from now
     downloadCount: 3,
     maxDownloads: 100,
   },
   // Add more mock transfer data here if needed, each within curly braces
 ];
 
-export default function DownloadPage({ params }: DownloadPageProps) {
+export default function DownloadPage() {
   const [isDownloading, setIsDownloading] = useState(false);
-  
+
   // Use React.use() to unwrap the params Promise
-  const resolvedParams = use(params as any) as { id: string }; // Added type assertion and cast
-  const transfer = mockTransfers.find(t => t.id === resolvedParams.id); // Find the transfer data that matches the current ID
+  const resolvedParams = "abc123def456"; // Added type assertion and cast
+  const transfer = mockTransfers.find(t => t.id === resolvedParams); // Find the transfer data that matches the current ID
 
   const handleDownload = async () => {
     setIsDownloading(true);
@@ -63,7 +56,7 @@ export default function DownloadPage({ params }: DownloadPageProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50/50 via-white to-purple-50/50 dark:from-gray-950 dark:via-gray-900 dark:to-blue-950/20">
-      
+
       <main className="container mx-auto px-4 py-12 max-w-3xl">
         <div className="text-center mb-12">
           <div className="p-6 bg-gradient-to-br from-blue-500 via-purple-600 to-indigo-600 rounded-3xl w-24 h-24 mx-auto mb-8 flex items-center justify-center shadow-2xl">
@@ -89,7 +82,7 @@ export default function DownloadPage({ params }: DownloadPageProps) {
                   Total size: {formatFileSize(totalSize)}
                 </CardDescription>
               </div>
-              
+
               <Button
                 onClick={handleDownload}
                 disabled={isDownloading}
@@ -100,7 +93,7 @@ export default function DownloadPage({ params }: DownloadPageProps) {
               </Button>
             </div>
           </CardHeader>
-          
+
           <CardContent>
             <div className="space-y-4">
               {transfer.files.map((file, index) => (
