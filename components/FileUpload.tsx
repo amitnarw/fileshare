@@ -17,17 +17,22 @@ export function FileUpload({ onFilesAdded }: FileUploadProps) {
   const [error, setError] = useState<string>('');
 
   const onDrop = useCallback((acceptedFiles: File[], rejectedFiles: any[]) => {
-    setError('');
+    setError(''); // Clear previous errors on new drop
 
     if (rejectedFiles.length > 0) {
-      const errors = rejectedFiles.map(f => f.errors[0]?.message).join(', ');
+      const errors = rejectedFiles.map(f => {
+        const errorMsg = f.errors[0]?.message;
+        // Check if the error includes 'larger than' and append the MB size
+        return errorMsg?.includes('larger than') ? `File is larger than ${MAX_FILE_SIZE / (1024 * 1024)}MB` : errorMsg; // Keep original error message if not size related
+      }).filter(Boolean).join(', '); // Filter out undefined or null error messages
       setError(errors);
       return;
     }
 
     const totalSize = acceptedFiles.reduce((acc, file) => acc + file.size, 0);
     if (totalSize > MAX_TOTAL_SIZE) {
-      setError('Total file size exceeds 200MB limit');
+      const maxSizeMB = MAX_TOTAL_SIZE / (1024 * 1024);
+      setError(`Total file size exceeds ${maxSizeMB}MB limit`);
       return;
     }
 
@@ -42,7 +47,12 @@ export function FileUpload({ onFilesAdded }: FileUploadProps) {
       'image/*': [],
       'video/*': [],
       'audio/*': [],
+      // Document types
       'application/pdf': [],
+      // Microsoft Office formats
+      'application/vnd.ms-powerpoint': [],
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation': [],
+      'application/vnd.ms-publisher': [],
       'application/msword': [],
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document': [],
       'application/vnd.ms-excel': [],
@@ -106,7 +116,7 @@ export function FileUpload({ onFilesAdded }: FileUploadProps) {
       {error && (
         <Alert className="mt-6 border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950/20">
           <AlertCircle className="h-4 w-4 text-red-600 dark:text-red-400" />
-          <AlertDescription className="text-red-800 dark:text-red-300">
+          <AlertDescription className="text-red-800 dark:text-red-300 text-center">
             {error}
           </AlertDescription>
         </Alert>
