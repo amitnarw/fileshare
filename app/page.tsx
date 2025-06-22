@@ -71,22 +71,20 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50/50 via-white to-purple-50/50 dark:from-gray-950 dark:via-gray-900 dark:to-blue-950/20">
-      
+
       <main className="container mx-auto px-4 py-12 max-w-5xl">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-950/50 dark:to-purple-950/50 rounded-full text-sm font-medium text-blue-700 dark:text-blue-300 mb-6 border border-blue-200/50 dark:border-blue-800/50">
             <Sparkles className="h-4 w-4" />
             Secure & Fast File Sharing
           </div>
-          
-          <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 dark:from-white dark:via-blue-200 dark:to-purple-200 bg-clip-text text-transparent mb-6 leading-tight">
+
+          <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-7xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 dark:from-white dark:via-blue-200 dark:to-purple-200 bg-clip-text text-transparent mb-6 leading-tight">
             Share files
             <br />
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-              anonymously
- </span>
- </h1>
- <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed mb-6">            Upload and share files quickly and securely. No account needed.
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">anonymously</span>
+          </h1>
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed mb-6">Upload and share files quickly and securely. No account needed.
           </p>
         </div>
 
@@ -94,9 +92,9 @@ export default function Home() {
           <FileUpload onFilesAdded={handleFilesAdded} />
 
           {hasFiles && (
-            <div ref={fileListRef} className="bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-3xl shadow-xl border border-gray-200/50 dark:border-gray-800/50 p-8">
-              <div className="flex items-center justify-between mb-8">
-                <div className="flex items-center gap-4">
+            <div ref={fileListRef} className="bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-3xl shadow-xl border border-gray-200/50 dark:border-gray-800/50 p-4 md:p-8">
+              <div className="flex flex-col sm:flex-row gap-5 sm:gap-0 items-center justify-between mb-8">
+                <div className="flex items-center gap-4 w-full">
                   <div className="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl shadow-lg">
                     <Upload className="h-6 w-6 text-white" />
                   </div>
@@ -111,7 +109,7 @@ export default function Home() {
                 {allFilesUploaded && (
                   <Button
                     onClick={() => setIsShareModalOpen(true)}
-                    className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 hover:from-blue-700 hover:via-purple-700 hover:to-indigo-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 px-6 py-3 rounded-xl"
+                    className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 hover:from-blue-700 hover:via-purple-700 hover:to-indigo-700 text-white shadow-lg hover:shadow-xl transition-all duration-200 px-6 py-3 rounded-xl w-full sm:w-auto"
                   >
                     <Send className="h-4 w-4 mr-2" />
                     Share Files

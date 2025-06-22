@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'sonner';
 import { ThemeProvider } from '@/components/ui/theme-provider';
-import Link from 'next/link';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import NextTopLoader from 'nextjs-toploader';
@@ -40,7 +39,7 @@ export default function RootLayout({
 
           <Footer />
           <Toaster position="bottom-right" />
-          <NextTopLoader />
+          <NextTopLoader showSpinner={false} />
         </ThemeProvider>
       </body>
     </html>

@@ -15,7 +15,7 @@ function getFileIcon(type: string) {
   if (type.startsWith('image/')) return Image;
   if (type.startsWith('video/')) return Video;
   if (type.startsWith('audio/')) return Music;
-  if (type.includes('pdf') || type.includes('document') || type.includes('text')) return FileText; 
+  if (type.includes('pdf') || type.includes('document') || type.includes('text')) return FileText;
   if (type.includes('zip') || type.includes('rar')) return Archive;
   return File;
 }
@@ -44,41 +44,41 @@ export function FileList({ files, onFileRemove }: FileListProps) {
       }
     });
   }, [files]);
+
   return (
-    <div className="bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-3xl shadow-xl border border-gray-200/50 dark:border-gray-800/50 p-4 sm:p-8">
- 
-      <div className="space-y-4">
-        {files.map((file) => (
-          <div
-            key={file.id}
-            className="flex items-center justify-between p-4 bg-gray-50/50 dark:bg-gray-800/30 rounded-xl border border-gray-200/50 dark:border-gray-700/50 hover:bg-gray-100/50 dark:hover:bg-gray-700/30 transition-all duration-200 backdrop-blur-sm"
-          >
-            <div className="flex items-center gap-4">
-              {file.type.startsWith('image/') && filePreviews.find(p => p.id === file.id)?.preview ? (
-                <div className="w-12 h-12 flex-shrink-0 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
-                  <img
-                    src={filePreviews.find(p => p.id === file.id)?.preview || ''}
-                    alt={file.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ) : (
-                <div className="p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200/50 dark:border-gray-700/50">
-                  {(() => {
-                    const IconComponent = getFileIcon(file.type);
-                    return <IconComponent className="h-5 w-5 text-gray-600 dark:text-gray-400" />;
-                  })()}
-                </div>
-              )}
-
-              <div className="min-w-0 flex-1 grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4 items-center">
-                <h4 className="font-semibold text-gray-900 dark:text-white truncate">{file.name}</h4>
-                <p className="text-sm text-gray-500 dark:text-gray-400 sm:text-right">{formatFileSize(file.size)}</p>
+    <div className="space-y-4">
+      {files.map((file) => (
+        <div
+          key={file.id}
+          className="flex flex-col sm:flex-row gap-5 items-center justify-between p-4 bg-gray-50/50 dark:bg-gray-800/30 rounded-xl border border-gray-200/50 dark:border-gray-700/50 hover:bg-gray-100/50 dark:hover:bg-gray-700/30 transition-all duration-200 backdrop-blur-sm w-full overflow-hidden"
+        >
+          <div className="flex items-center gap-4 w-full">
+            {file.type.startsWith('image/') && filePreviews.find(p => p.id === file.id)?.preview ? (
+              <div className="w-12 h-12 flex-shrink-0 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+                <img
+                  src={filePreviews.find(p => p.id === file.id)?.preview || ''}
+                  alt={file.name}
+                  className="w-full h-full object-cover"
+                />
               </div>
-            </div>
+            ) : (
+              <div className="p-3 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200/50 dark:border-gray-700/50">
+                {(() => {
+                  const IconComponent = getFileIcon(file.type);
+                  return <IconComponent className="h-5 w-5 text-gray-600 dark:text-gray-400" />;
+                })()}
+              </div>
+            )}
 
+            <div className="min-w-0 flex flex-col items-start">
+              <h4 className="font-semibold text-gray-900 dark:text-white line-clamp-1">{file.name}</h4>
+              <p className="text-sm text-gray-500 dark:text-gray-400 sm:text-right">{formatFileSize(file.size)}</p>
+            </div>
+          </div>
+
+          <div className='flex flex-row gap-2 items-center justify-end w-full md:w-auto'>
             {file.isUploading ? (
-              <div className="w-24 ml-4">
+              <div className="w-full md:w-24">
                 <Progress value={file.uploadProgress} className="h-2" />
                 <p className="text-sm text-blue-600 dark:text-blue-400 font-medium text-right">
                   {Math.round(file.uploadProgress)}%
@@ -100,8 +100,9 @@ export function FileList({ files, onFileRemove }: FileListProps) {
               <X className="h-5 w-5" />
             </Button>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
+
   );
 }

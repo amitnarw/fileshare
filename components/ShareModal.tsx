@@ -57,8 +57,8 @@ export function ShareModal({ isOpen, onClose, files }: ShareModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-lg bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-gray-200/50 dark:border-gray-800/50">
-        <DialogHeader className="text-center pb-6">
-          <div className="mx-auto p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl w-16 h-16 flex items-center justify-center mb-4">
+        <DialogHeader className="text-center pb-6 flex flex-col items-center gap-4">
+          <div className="mx-auto bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl w-16 h-16 flex items-center justify-center">
             <Sparkles className="h-8 w-8 text-white" />
           </div>
           <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">

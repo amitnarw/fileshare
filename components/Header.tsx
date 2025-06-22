@@ -48,8 +48,7 @@ export function Header() {
           ${menuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'}
           `}
         >
-          <div className="flex flex-col p-4 space-y-4">
-            {/* Placeholder Links */}
+          <div className="flex flex-col p-4 pb-8 gap-4">
             <Link href="/" className="text-lg font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400">
               Home
             </Link>
@@ -62,18 +61,6 @@ export function Header() {
             <Link href="/contact" className="text-lg font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400">
               Contact Us
             </Link>
-
-            {/* Action Buttons - Placeholder */}
-            {/* You might want to place these within the mobile menu as well */}
-            <div className="pt-4 border-t border-gray-200 dark:border-gray-800">
-              <ThemeToggle />
-            </div>
-            <Button asChild variant="default" className="w-full">
-              <Link href="#">Login / Signup</Link>
-            </Button>
-            <Button asChild variant="outline" className="w-full">
-              <Link href="#">View Source</Link>
-            </Button>
           </div>
         </div>
 
@@ -83,7 +70,6 @@ export function Header() {
           <button className="ml-2 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            {/* Replace with state-driven icon based on menu open/closed */}
             {menuOpen ?
               <X className="h-6 w-6" />
               :
