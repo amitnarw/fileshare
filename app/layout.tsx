@@ -11,8 +11,13 @@ import NextTopLoader from 'nextjs-toploader';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'FileShare - Secure File Sharing',
-  description: 'Share files effortlessly with secure, fast file transfers',
+  title: 'FileShare - Anonymous File Sharing',
+  description: 'Upload and share your files anonymously and securely. No registration required.',
+  keywords: ['file sharing', 'anonymous', 'upload', 'share', 'secure'],
+  openGraph: {
+    title: 'FileShare - Anonymous File Sharing',
+    description: 'Upload and share your files anonymously and securely. No registration required.',
+  },
 };
 
 export default function RootLayout({

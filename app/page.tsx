@@ -1,10 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { FileUpload } from '@/components/FileUpload';
 import { FileList } from '@/components/FileList';
 import { ShareModal } from '@/components/ShareModal';
-import { Header } from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Upload, Send, Sparkles } from 'lucide-react';
 
@@ -21,6 +20,7 @@ export interface FileItem {
 export default function Home() {
   const [files, setFiles] = useState<FileItem[]>([]);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const fileListRef = useRef<HTMLDivElement>(null);
 
   const handleFilesAdded = (newFiles: File[]) => {
     const fileItems: FileItem[] = newFiles.map(file => ({
@@ -51,6 +51,14 @@ export default function Home() {
         }));
       }, 200 + index * 50);
     });
+
+    // Scroll to the file list area
+    // Add a small delay to ensure the DOM has updated
+    setTimeout(() => {
+      if (fileListRef.current) {
+        fileListRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 100); // Adjust delay as needed
   };
 
   const handleFileRemove = (fileId: string) => {
@@ -75,14 +83,10 @@ export default function Home() {
             Share files
             <br />
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-              effortlessly
-            </span>
-          </h1>
-          
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Upload your files and share them with anyone, anywhere. 
-            <br />
-            <span className="text-gray-500 dark:text-gray-400">Fast, secure, and beautifully simple.</span>
+              anonymously
+ </span>
+ </h1>
+ <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed mb-6">            Upload and share files quickly and securely. No account needed.
           </p>
         </div>
 
@@ -90,7 +94,7 @@ export default function Home() {
           <FileUpload onFilesAdded={handleFilesAdded} />
 
           {hasFiles && (
-            <div className="bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-3xl shadow-xl border border-gray-200/50 dark:border-gray-800/50 p-8">
+            <div ref={fileListRef} className="bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl rounded-3xl shadow-xl border border-gray-200/50 dark:border-gray-800/50 p-8">
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl shadow-lg">

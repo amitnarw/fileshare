@@ -80,7 +80,7 @@ export function FileUpload({ onFilesAdded }: FileUploadProps) {
           </h3>
           
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-md mx-auto">
-            Drag and drop files here, or click to browse your device
+            Drag and drop files here to upload, or click the button below.
           </p>
           
           <Button 
